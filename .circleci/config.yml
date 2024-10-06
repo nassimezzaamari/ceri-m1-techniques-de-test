@@ -1,49 +1,47 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-orbs:
-  maven: circleci/maven@3.1.0
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      # Specify the version you desire here
-      # See: https://circleci.com/developer/images/image/cimg/openjdk
-      # Java 8 ou plus récent
+      # Using CircleCI's OpenJDK image which includes Maven
       - image: cimg/openjdk:8.0
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/circleci-images/
-      # - image: circleci/postgres:9.4
-
     environment:
-      # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
-
-    # Add steps to the job
-    # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
     steps:
-      # Checkout the code as the first step.
+      # Checkout the code
       - checkout
 
+      # Set up Maven cache to avoid downloading dependencies every time
+      - restore_cache:
+          keys:
+            - maven-{{ checksum "pom.xml" }}
+            - maven-
 
+      # Run Maven to download dependencies
+      - run:
+          name: Install Maven dependencies
+          command: mvn dependency:go-offline -B
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
+      # Save Maven dependencies to cache
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: maven-{{ checksum "pom.xml" }}
+
+      # Run Maven tests
+      - run:
+          name: Run tests
+          command: mvn test
+
+      # Optionally: Store test results for better visibility in CircleCI
+      - store_test_results:
+          path: target/surefire-reports/
+
 workflows:
-  maven_test: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  maven_test:
     jobs:
-      - maven/test
       - build:
-          # Branche master seulement
           filters:
             branches:
               only: master
