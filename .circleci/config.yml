@@ -1,5 +1,9 @@
 version: 2.1
 
+
+orbs:
+  codecov: codecov/codecov@4.0.1
+
 jobs:
   build:
     docker:
@@ -38,8 +42,6 @@ jobs:
       - store_test_results:
           path: target/surefire-reports/
 
-orbs:
-  codecov: codecov/codecov@4.0.1
 
 workflows:
   maven_test:
@@ -50,6 +52,8 @@ workflows:
               only: master
   upload-to-codecov:
     jobs:
-      - checkout
-      - codecov/upload
+      - build
+      - codecov/upload:
+          requires:
+            - build
 
