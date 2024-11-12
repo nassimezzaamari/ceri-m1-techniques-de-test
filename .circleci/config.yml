@@ -38,6 +38,9 @@ jobs:
       - store_test_results:
           path: target/surefire-reports/
 
+orbs:
+  codecov: codecov/codecov@4.0.1
+
 workflows:
   maven_test:
     jobs:
@@ -45,3 +48,8 @@ workflows:
           filters:
             branches:
               only: master
+  upload-to-codecov:
+    jobs:
+      - checkout
+      - codecov/upload
+
