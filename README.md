@@ -4,6 +4,8 @@
 
 [![Checkstyle](https://github.com/nassimezzaamari/ceri-m1-techniques-de-test/workflows/Checkstyle/badge.svg)](https://github.com/nassimezzaamari/ceri-m1-techniques-de-test/actions?query=workflow%3ACheckstyle)
 
+![Checkstyle](target/site/badges/checkstyle-result.svg) ????
+
 
 Author : Nassim Ezzaamari
 Group : M1 ILSEN Classique 
