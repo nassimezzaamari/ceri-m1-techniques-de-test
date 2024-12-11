@@ -38,17 +38,6 @@
         </dependency>
     </dependencies>
 
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <build>
         <plugins>
 
@@ -72,28 +61,21 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
+
+
+
             <plugin>
                 <groupId>com.github.bordertech.buildtools</groupId>
                 <artifactId>badger</artifactId>
                 <version>1.0.0</version>
                 <executions>
                     <execution>
-                        <phase>site</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>badges</goal>
                         </goals>
                         <configuration>
-                            <outputDir>target/site/badges</outputDir>
+                            <outputDir>badges</outputDir>
                             <inputFiles>
                                 <inputFile>target/checkstyle-result.xml</inputFile>
                             </inputFiles>
@@ -102,6 +84,43 @@
                 </executions>
             </plugin>
 
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>LATEST</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>check-style</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <configLocation>google_checks.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
         </plugins>
+
+
+
+
+
+
+
     </build>
 </project>
