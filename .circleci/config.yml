@@ -44,6 +44,37 @@ jobs:
           command: mvn jacoco:report
       - codecov/upload
 
+
+      - run:
+          name: Generate Javadoc
+          command: |
+            mvn javadoc:javadoc
+
+
+      - run:
+          name: Generate Javadoc
+          command: mvn javadoc:javadoc || true
+
+      - run:
+          name: Publish Javadoc to GitHub Pages
+          command: |-
+            git config --global user.email "nassim.ezzaamari@alumni.univ-avignon.fr"
+            git config --global user.name "nassimezzaamari"
+            
+            mkdir -p target/site/javadoc
+            
+            cp -r target/reports/apidocs/* target/site/javadoc/
+            
+            git checkout --orphan gh-pages
+            git rm -rf .
+            
+            cp -r target/site/javadoc/. .
+            git add .
+
+            git commit -m "javadoc ajout"
+            git push --force --set-upstream origin gh-pages
+            
+
       - run:
           name: Run Checkstyle
           command: mvn checkstyle:check
