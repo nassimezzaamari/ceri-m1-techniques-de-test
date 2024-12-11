@@ -39,6 +39,10 @@ jobs:
           command: mvn clean verify
 
       - run:
+          name: Run checkstyle
+          command: mvn checkstyle:checkstyle
+
+      - run:
           name: Generate coverage report
           command: mvn jacoco:report
 
