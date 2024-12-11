@@ -39,8 +39,8 @@ jobs:
           command: mvn clean verify
 
       - run:
-          name: Run Checkstyle
-          command: mvn checkstyle:checkstyle
+          name: Run checkstyle
+          command: mvn checkstyle:check
 
       - run:
           name: Generate coverage report
@@ -50,11 +50,6 @@ jobs:
       # Optionally: Store test results for better visibility in CircleCI
       - store_test_results:
           path: target/surefire-reports/
-
-      - store_artifacts:
-          path: target/site/checkstyle.html
-          destination: checkstyle
-
 
       - codecov/upload
 
