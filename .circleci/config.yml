@@ -73,7 +73,7 @@ jobs:
 
             git commit -m "javadoc ajout"
             git push --force --set-upstream origin gh-pages
-            
+              
 
       - run:
           name: Run Checkstyle
