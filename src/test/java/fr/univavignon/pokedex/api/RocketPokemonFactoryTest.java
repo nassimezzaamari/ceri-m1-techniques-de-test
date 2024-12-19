@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class IRocketPokemonFactoryTest {
+public class RocketPokemonFactoryTest {
 
     private IPokemonFactory pokemonFactory;
     private Pokemon validMetadata;
