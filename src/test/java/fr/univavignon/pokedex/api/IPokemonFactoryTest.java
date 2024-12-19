@@ -34,6 +34,4 @@ public class IPokemonFactoryTest {
         assertEquals(4, bulbi.getCandy());
     }
 
-
-
 }
