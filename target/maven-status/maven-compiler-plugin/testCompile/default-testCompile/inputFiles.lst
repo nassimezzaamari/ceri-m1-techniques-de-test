@@ -1,0 +1,7 @@
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/IPokedexFactoryTest.java
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/IPokedexTest.java
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/IPokemonFactoryTest.java
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/IPokemonMetadataProviderTest.java
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/IPokemonTrainerFactoryTest.java
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/PokemonTrainerTest.java
+/home/circleci/project/src/test/java/fr/univavignon/pokedex/api/RocketPokemonFactoryTest.java
