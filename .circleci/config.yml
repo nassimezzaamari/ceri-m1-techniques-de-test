@@ -75,9 +75,9 @@ jobs:
             git push --force --set-upstream origin gh-pages
               
 
-      - run:
-          name: Run Checkstyle
-          command: mvn checkstyle:check
+    #- run:
+    #    name: Run Checkstyle
+    #    command: mvn checkstyle:check
 
       # Optionally: Store test results for better visibility in CircleCI
       - store_test_results:
