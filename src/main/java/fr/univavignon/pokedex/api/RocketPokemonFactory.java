@@ -36,20 +36,22 @@ public class RocketPokemonFactory implements IPokemonFactory {
 	public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
 		String name;
 		if(!index2name.containsKey(index)) {
-			name = index2name.get(0);
+			name = index2name.get(0); // MissingNO
 		} else {
-			name = index2name.get(index);
+			name = index2name.get(index); // Normal pokémon
 		}
 		int attack;
 		int defense;
 		int stamina;
 		double iv;
+		// Ash's Pikachu
 		if(index < 0) {
 			attack = 1000;
 			defense = 1000;
 			stamina = 1000;
 			iv = 0;
 		} else {
+			// Rng
 			attack = RocketPokemonFactory.generateRandomStat();
 			defense = RocketPokemonFactory.generateRandomStat();
 			stamina = RocketPokemonFactory.generateRandomStat();
